@@ -1,6 +1,6 @@
 import MainTitles from "../../components/titles/MainTitles";
 import SubTitles from "../../components/titles/SubTitles";
-import TodayData from "./currentweather/TodayData";
+import TodayWeather from "./currentweather/TodayWeather";
 
 type Props = {
     data: {
@@ -56,14 +56,13 @@ export default function CurrentWeather({ data }: Props) {
         <div className="container justify-center items-center mx-auto my-10 space-y-2">
             <div className="flex items-end gap-2">
                 <MainTitles title={data.location.name} />
-                
-                <SubTitles title={'('+data.location.localtime } />
-                <SubTitles title={data.location.country+')'} />
-                
+                <div >
+                <SubTitles title={data.location.country} />
+                <SubTitles title={data.location.localtime } />
+                </div>    
             </div>
             <div>
-
-            <TodayData condition={data.current.condition}/>
+            <TodayWeather current={data.current}/>
             </div>
 
         </div>
