@@ -61,7 +61,7 @@ export default function CurrentWeather({ data }: Props) {
                 <SubTitles title={data.location.localtime } />
                 </div>    
             </div>
-            <div>
+            <div className="sm:mx-5 lg:mx-0">
             <TodayWeather current={data.current}/>
             </div>
 

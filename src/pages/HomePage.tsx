@@ -9,14 +9,16 @@ export default function HomePage() {
   const [status, setStatus] = useState('notStarted')
   const [data, setData] = useState(null)
   const [error, setError] = useState(null) //catch
+  const [location,setLocation]=useState('Badulla')
 
   useEffect(() => {
     if ('notStarted' === status) {
       setStatus("Loading...")
 
-      axios.get(`http://api.weatherapi.com/v1/current.json?key=157f642eb5f140ab8df154059251306&q=badulla&aqi=yes`)
+      axios.get(`http://api.weatherapi.com/v1/current.json?key=157f642eb5f140ab8df154059251306&q=${location}&aqi=yes`)
         .then(response => {
           setData(response.data)
+          setStatus("completed")
           console.log(response.data)
         })
         .catch(error => {
@@ -27,11 +29,19 @@ export default function HomePage() {
 
   }, []);
 
+  const handleLocation=(giveLocation:string)=>{
+    setLocation(giveLocation)
+  }
+
   return (
     <div className='bg-gray-100 min-h-screen w-full'  >
-      <NavigationBar />
+      <NavigationBar/>
       
-      {error ? error : <>
+      {error ? (
+        <div className="container flex min-h-screen justify-center items-center text-2xl font-poppins mx-auto text-red-500">
+          <p>{error}</p>
+        </div>
+      ) : <>
         {data ? <CurrentWeather data={data} /> :
           <div className=' container flex min-h-screen justify-center items-center text-4xl  font-poppins  mx-auto '>
             <p className='animate-bounce'>{status}</p>
