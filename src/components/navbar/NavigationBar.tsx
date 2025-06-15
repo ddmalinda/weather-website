@@ -3,34 +3,36 @@ import { useEffect, useState } from "react"
 import Searchbox from "./nagigationComponents/Searchbox"
 
 const API_KEY = "157f642eb5f140ab8df154059251306"
+type Props = {
+  currentLocation: string;
+  SetCurrentLocation: React.Dispatch<React.SetStateAction<string>>;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
+}
 
-export default function NavigationBar() {
+export default function NavigationBar({ currentLocation, SetCurrentLocation, setStatus }: Props) {
 
   //hooks
-  const [location, setLocation] = useState("")
-  const [loactionError, SetLocationError] = useState('')
-
+  const [location, setLocation] = useState('')
+  const [loactionError, setLocationError] = useState('')
   const [suggetions, setSuggetions] = useState('no location')
   const [showSuggetion, setShowSuggetions] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
 
-  },[])
+  }, [])
+
 
   async function handleInputChange(value: string) {
     setLocation(value);
     if (value.length > 2) {
       try {
         const response = await axios.get(`http://api.weatherapi.com/v1/timezone.json?key=${API_KEY}&q=${location}`)
-        console.log(response.data)
-        console.log(response.data.location.name)
         setShowSuggetions(true)
-        SetLocationError('')
-        console.log(suggetions)
+        setLocationError('')
         setSuggetions(response.data.location.name)
       } catch (error) {
         setSuggetions('')
-        SetLocationError('')
+        setLocationError('')
         setShowSuggetions(false)
 
       }
@@ -39,16 +41,21 @@ export default function NavigationBar() {
       setShowSuggetions(false)
     }
   }
-const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
- if(suggetions){
-    SetLocationError("Location not found")
- }else{
-   SetLocationError("")
-   setShowSuggetions(false)
-   setLocation('')
- }
-}
+
+  const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!suggetions) {
+      setLocationError("Location not found")
+    } else if (location === "") {
+      setStatus("notStarted")
+    } else {
+      SetCurrentLocation(location)
+      setStatus("enterd")
+      setLocationError("")
+      setShowSuggetions(false)
+      setLocation('')
+    }
+  }
 
   return (
     <nav className="shadow-sm sticky top-0 left-0 z-50 bg-white">
@@ -60,14 +67,14 @@ const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
         </div>
         <section className="flex gap-2 items-center">
           <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#6a7282"><path d="M480.06-486.67q30.27 0 51.77-21.56 21.5-21.55 21.5-51.83 0-30.27-21.56-51.77-21.55-21.5-51.83-21.5-30.27 0-51.77 21.56-21.5 21.55-21.5 51.83 0 30.27 21.56 51.77 21.55 21.5 51.83 21.5ZM480-80Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Z" /></svg>
-          <p className="font-poppins uppercase"> srilanka</p>
-          <Searchbox value={location} 
-          onChange={(e)=>handleInputChange(e.target.value)}  
-          onSubmite={handleSubmitSearch} 
-          error={loactionError}
-           handleSuggestionsClick={handleInputChange}
-           showSuggestions={showSuggetion}
-           suggestion={suggetions} 
+          <p className="font-poppins uppercase"> {currentLocation}</p>
+          <Searchbox value={location}
+            onChange={(e) => handleInputChange(e.target.value)}
+            onSubmite={handleSubmitSearch}
+            error={loactionError}
+            handleSuggestionsClick={handleInputChange}
+            showSuggestions={showSuggetion}
+            suggestion={suggetions}
           />
         </section>
 
