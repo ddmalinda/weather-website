@@ -4,22 +4,22 @@ import NavigationBar from '../components/navbar/NavigationBar'
 import CurrentWeather from '../layouts/homepage/CurrentWeather'
 import axios from 'axios'
 
+const API_KEY=import.meta.env.VITE_API_KEY;
 export default function HomePage() {
   //hooks
   const [status, setStatus] = useState('notStarted')
   const [data, setData] = useState(null)
-  const [error, setError] = useState(null) //catch
+  const [error, setError] = useState(null)
   const [currentLocation, SetCurrentLocation] = useState('')
 
   useEffect(() => {
     if ('enterd' === status) {
       setStatus("Loading...")
       try {
-        axios.get(`http://api.weatherapi.com/v1/current.json?key=157f642eb5f140ab8df154059251306&q=${currentLocation}&aqi=yes`)
+        axios.get(`http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${currentLocation}&aqi=yes`)
           .then(response => {
             setData(response.data)
             setStatus("completed")
-  
           })
           .catch(error => {
             setError(error)
@@ -33,7 +33,7 @@ export default function HomePage() {
   }, [currentLocation]);
   return (
     <div className='bg-gray-100 min-h-screen w-full'  >
-      <NavigationBar currentLocation={currentLocation} SetCurrentLocation={SetCurrentLocation} setStatus={setStatus} />
+      <NavigationBar currentLocation={currentLocation} SetCurrentLocation={SetCurrentLocation} setStatus={setStatus} API_KEY={API_KEY} />
 
       {error ? (
         <div className="container flex min-h-screen justify-center items-center text-2xl font-poppins mx-auto text-red-500">

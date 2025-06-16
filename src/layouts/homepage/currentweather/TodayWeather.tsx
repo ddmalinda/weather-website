@@ -39,12 +39,12 @@ type Props = {
 }
 export default function TodayWeather({ current }: Props) {
   return (
-    <div className=' bg-white rounded-xl shadow-xl md:flex md:justify-around p-3 '>
+    <div className=' bg-white rounded-xl shadow-xl  md:flex max-sm:flex-col max-sm:mx-5 justify-around p-3 '>
 
       <WrapSingleWeatherData>
         <div>
           {/*weather*/}
-          <p className='text-4xl justify-center flex font-poppins p-2'>{current.condition.text}</p>
+          <p className='lg:text-4xl md:text-xl text-center flex font-poppins p-2'>{current.condition.text}</p>
           <img className='justify-center flex mx-auto' src={current.condition.icon} width="100px" height="100px" />
         </div>
       </WrapSingleWeatherData>
@@ -52,7 +52,7 @@ export default function TodayWeather({ current }: Props) {
         {/*temperature*/}
         <div>
           <div className="flex justify-center">
-            <p className="text-6xl font-medium font-roboto  flex">{current.temp_c}</p>
+            <p className="lg:text-6xl md:text-4xl max-sm:text-6xl font-medium font-roboto  flex">{current.temp_c}</p>
             <p className="text-2xl">°C</p>
           </div>
           <p className="flex justify-center">feelslike {current.feelslike_c}</p>
@@ -106,7 +106,7 @@ export default function TodayWeather({ current }: Props) {
           
           <MiniTitles title="UV Index" />
          <svg  xmlns="http://www.w3.org/2000/svg"  width="80"  height="80"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h1m16 0h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7m-9.7 5.7a4 4 0 1 1 8 0" /><path d="M12 4v-1" /><path d="M13 16l2 5h1l2 -5" /><path d="M6 16v3a2 2 0 1 0 4 0v-3" /></svg>
-          <p className="text-xl font-medium font-roboto  flex">{current.uv+" hPa"}</p>
+          <p className="text-xl font-medium font-roboto  flex">{current.uv}</p>
         </>
       </WrapSingleWeatherData>
 

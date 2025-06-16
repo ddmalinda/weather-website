@@ -54,14 +54,14 @@ type Props = {
 export default function CurrentWeather({ data }: Props) {
     return (
         <div className="container justify-center items-center mx-auto my-10 space-y-2">
-            <div className="flex items-end gap-2">
+            <div className="flex items-end gap-2 max-sm:ml-5">
                 <MainTitles title={data.location.name} />
                 <div >
                 <SubTitles title={data.location.country} />
                 <SubTitles title={data.location.localtime } />
                 </div>    
             </div>
-            <div className="sm:mx-5 lg:mx-0">
+            <div className="">
             <TodayWeather current={data.current}/>
             </div>
 
