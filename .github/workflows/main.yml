@@ -1,9 +1,12 @@
-name: Deploy on github action
+name: Deploy on GitHub Pages
 
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write  # 🟢 This grants the necessary push access for GitHub Actions
 
 jobs:
   build:
@@ -14,11 +17,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: '18' # or your preferred Node version
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci
 
       - name: Build project
         run: npm run build
@@ -30,12 +35,15 @@ jobs:
           path: ./dist
 
   deploy:
-    name: Deploy
+    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
     steps:
+      - name: Checkout repo (required for gh-pages)
+        uses: actions/checkout@v4
+
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
