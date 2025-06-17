@@ -56,10 +56,10 @@ type Props = {
 export default function CurrentWeather({ data }: Props) {
     return (
         <div className="container justify-center items-center mx-auto my-10 ">
-            <div className="max-md:mx-5 space-y-2">
+            <div className="mx-5 space-y-2">
 
                  <BigTitles title={"Current Weather"} />
-            <div className="flex items-end gap-2 max-sm:ml-5">
+            <div className="flex items-end gap-2 ">
                 <MainTitles title={getDayName(data.location.localtime)} />
 
                 <div >

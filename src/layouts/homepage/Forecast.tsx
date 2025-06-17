@@ -50,11 +50,11 @@ export default function Forecast({ data }: Props) {
                                 <SubTitles title={val.date} />
                             </div>
                             <div className="flex flex-row gap-x-4 justify-around max-md:flex-col  gap-5">
-                            <div className="flex-col flex  rounded-2xl border lg:w-7/50 max-md:w-auto max-md:mx-5 py-5 ">
+                            <div className="flex-col flex  rounded-2xl border-gray-500 border lg:w-7/50 max-md:w-auto max-md:mx-5 py-5 ">
                                 <p className='lg:text-2xl md:xl max-sm:text-xl text-center justify-center flex font-poppins p-2'>{val.day.condition.text}</p>
                                 <img className='justify-center flex mx-auto' src={val.day.condition.icon} width="100px" height="100px" />
                             </div>
-                            <div key={key} className="border rounded-2xl lg:w-42/50 md:w-42/50  max-md:mx-5   p-3">
+                            <div key={key} className="border rounded-2xl border-gray-500 lg:w-42/50 md:w-42/50  max-md:mx-5   p-3">
                                 <SingleForecastDay date={val.date} hour={val.hour} />
                             </div>
                             </div>
