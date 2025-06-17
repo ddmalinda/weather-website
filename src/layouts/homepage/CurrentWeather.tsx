@@ -55,15 +55,15 @@ type Props = {
 }
 export default function CurrentWeather({ data }: Props) {
     return (
-        <div className="container">
+        <div className="container justify-center items-center mx-auto my-10 ">
+            <div className="max-md:mx-5 space-y-2">
 
-        <div className=" justify-center items-center mx-auto my-10 max-md:mx-5  space-y-2">
                  <BigTitles title={"Current Weather"} />
-            <div className="flex items-end gap-2">
+            <div className="flex items-end gap-2 max-sm:ml-5">
                 <MainTitles title={getDayName(data.location.localtime)} />
 
                 <div >
-                <SubTitles title={data.location.name+" , "+data.location.country} />
+                <SubTitles title={data.location.name+" ,"+data.location.country} />
                 <SubTitles title={data.location.localtime } />
                 </div>    
             </div>
@@ -71,7 +71,6 @@ export default function CurrentWeather({ data }: Props) {
             <BasicWeatherDetails current={data.current}/>
 
             </div>
-
         </div>
         </div>
     )

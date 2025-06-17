@@ -1,8 +1,4 @@
-import MainTitles from "../../../components/titles/MainTitles";
-import SubTitles from "../../../components/titles/SubTitles";
-import getDayName from "../../../util/functions";
 import SingleHourData from "./SingleHourData";
-
 type Props = {
     date: string;
     hour: [{
@@ -15,7 +11,7 @@ type Props = {
     }]
 }
 
-export default function SingleForecastDay({ date,hour }: Props) {
+export default function SingleForecastDay({ hour }: Props) {
     return (
         <div >
        
