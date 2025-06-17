@@ -17,7 +17,7 @@ export default function HomePage() {
     if ('enterd' === status) {
       setStatus("Loading...")
       try {
-        axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentLocation}&days=7&aqi=no&alerts=no`)
+        axios.get(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${currentLocation}&days=7&aqi=no&alerts=no`)
           .then(response => {
             setData(response.data)
             setStatus("completed")
