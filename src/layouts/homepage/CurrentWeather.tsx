@@ -1,6 +1,8 @@
+import BigTitles from "../../components/titles/BigTIlte";
 import MainTitles from "../../components/titles/MainTitles";
 import SubTitles from "../../components/titles/SubTitles";
-import TodayWeather from "./currentweather/TodayWeather";
+import getDayName from "../../util/functions";
+import BasicWeatherDetails from "./currentweather/TodayWeather";
 
 type Props = {
     data: {
@@ -53,18 +55,24 @@ type Props = {
 }
 export default function CurrentWeather({ data }: Props) {
     return (
-        <div className="container justify-center items-center mx-auto my-10 space-y-2">
-            <div className="flex items-end gap-2 max-sm:ml-5">
-                <MainTitles title={data.location.name} />
+        <div className="container">
+
+        <div className=" justify-center items-center mx-auto my-10 max-md:mx-5  space-y-2">
+                 <BigTitles title={"Current Weather"} />
+            <div className="flex items-end gap-2">
+                <MainTitles title={getDayName(data.location.localtime)} />
+
                 <div >
-                <SubTitles title={data.location.country} />
+                <SubTitles title={data.location.name+" , "+data.location.country} />
                 <SubTitles title={data.location.localtime } />
                 </div>    
             </div>
             <div className="">
-            <TodayWeather current={data.current}/>
+            <BasicWeatherDetails current={data.current}/>
+
             </div>
 
+        </div>
         </div>
     )
 }

@@ -37,9 +37,9 @@ type Props = {
     uv: number;
   };
 }
-export default function TodayWeather({ current }: Props) {
+export default function BasicWeatherDetails({ current }: Props) {
   return (
-    <div className=' bg-white rounded-xl shadow-xl  md:flex max-sm:flex-col max-sm:mx-5 justify-around p-3 '>
+    <div className=' bg-white rounded-xl shadow-xl  md:flex max-sm:flex-col justify-around p-3 '>
 
       <WrapSingleWeatherData>
         <div>
