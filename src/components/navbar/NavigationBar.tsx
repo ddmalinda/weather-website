@@ -1,5 +1,5 @@
 import axios from "axios"
-import {useState } from "react"
+import {useEffect, useState } from "react"
 import Searchbox from "./nagigationComponents/Searchbox"
 
 type Props = {
@@ -17,10 +17,10 @@ export default function NavigationBar({ currentLocation, SetCurrentLocation, set
   const [suggetions, setSuggetions] = useState('no location')
   const [showSuggetion, setShowSuggetions] = useState(false)
 
-  
-  async function handleInputChange(value: string) {
-    setLocation(value);
-    if (value.length > 2) {
+  useEffect(()=>{
+
+     const fetchData = async () => {
+        if (location.length > 2) {
       try {
         const response = await axios.get(`https://api.weatherapi.com/v1/timezone.json?key=${API_KEY}&q=${location}`)
         setShowSuggetions(true)
@@ -36,6 +36,14 @@ export default function NavigationBar({ currentLocation, SetCurrentLocation, set
       setSuggetions('')
       setShowSuggetions(false)
     }
+     }
+
+     fetchData();
+
+  },[location,API_KEY])
+
+  function handleInputChange(value: string) {
+    setLocation(value);
   }
 
   const handleSubmitSearch = (e: React.FormEvent<HTMLFormElement>) => {
