@@ -22,7 +22,7 @@ export default function NavigationBar({ currentLocation, SetCurrentLocation, set
     setLocation(value);
     if (value.length > 2) {
       try {
-        const response = await axios.get(`http://api.weatherapi.com/v1/timezone.json?key=${API_KEY}&q=${location}`)
+        const response = await axios.get(`https://api.weatherapi.com/v1/timezone.json?key=${API_KEY}&q=${location}`)
         setShowSuggetions(true)
         setLocationError('')
         setSuggetions(response.data.location.name)
